@@ -14,7 +14,8 @@ function getEntry (dir, entryFile) {
   var files = glob.sync(dir + '/pages/**/main.js');
   var map = {};
   files.forEach(file => {
-    var key = file.replace(dir + '/', '').replace(/\.js$/, '');
+    var key = path.dirname(file).slice(dir.length + 1).replace(path.sep, '/')
+    file = file.replace(/\//g, '\\')
     map[key] = file;
   })
   return map;
